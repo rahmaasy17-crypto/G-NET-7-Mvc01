@@ -18,7 +18,13 @@ namespace GymManagement.Controllers
             var plans =await dbContext.plans.ToListAsync();
             return View(plans);
         }
-        // Detaits action>> Get BaseUrL/PLans/Detaits/ id 
-
+        // Details action>> Get BaseUrL/PLans/Details/ id 
+        public async Task<IActionResult> Details(int id)
+        {
+            var plan = await dbContext.plans.FindAsync(id);
+            if (plan is null) return RedirectToAction(nameof(Index));
+          else
+            return View(plan);
+        }
     }
 }
